@@ -14,3 +14,4 @@ Branch C: Orders > 3000
 This step acts as the core business logic layer, dynamically routing each record into the appropriate category.
 
 Each branch then passes its filtered dataset into a Convert to File (CSV) node. Here, the segmented JSON data is transformed into separate CSV files, making the output easy to share, analyze, or integrate with other systems.
+
