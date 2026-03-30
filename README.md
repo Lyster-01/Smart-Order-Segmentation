@@ -32,6 +32,7 @@ Each branch then passes its filtered dataset into a Convert to File (CSV) node. 
 3. Automates reporting and communication, improving operational efficiency.
 
 ### Use Cases
+
 1. Sales Analysis: Segment customers based on purchase value for targeted strategies.
 2. Financial Reporting: Quickly generate categorized revenue reports.
 3. Customer Prioritization: Identify high-value vs low-value orders for business decisions.
