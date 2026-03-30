@@ -37,3 +37,7 @@ Each branch then passes its filtered dataset into a Convert to File (CSV) node. 
 2. Financial Reporting: Quickly generate categorized revenue reports.
 3. Customer Prioritization: Identify high-value vs low-value orders for business decisions.
 4. Operational Automation: Replace manual Excel processing and email distribution tasks.
+
+#### Additional Insights
+
+**Modular architecture**: Each node handles a single responsibility (upload → transform → segment → export → send).
