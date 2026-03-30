@@ -25,7 +25,8 @@ Each branch then passes its filtered dataset into a Convert to File (CSV) node. 
 4. Distribute segmented insights automatically via email.
 
 ### Why This Is Powerful
-Eliminates manual data sorting and classification.
-Ensures consistent and error-free segmentation using rule-based logic.
-Enables scalable handling of large datasets without additional effort.
-Automates reporting and communication, improving operational efficiency.
+
+1. Eliminates manual data sorting and classification.
+2. Ensures consistent and error-free segmentation using rule-based logic.
+3. Enables scalable handling of large datasets without additional effort.
+3. Automates reporting and communication, improving operational efficiency.
