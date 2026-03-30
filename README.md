@@ -42,3 +42,4 @@ Each branch then passes its filtered dataset into a Convert to File (CSV) node. 
 
 **Modular architecture:** Each node handles a single responsibility (upload → transform → segment → export → send).
 **Scalable logic:** The Switch node can easily be extended with more conditions.
+**Format interoperability:** Converts raw Excel into both JSON (processing) and CSV (output usability).
