@@ -1,0 +1,363 @@
+{
+  "name": "Smart Order Segmentation",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload file",
+        "formDescription": "-",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "upload .xlsx",
+              "fieldType": "file"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -496,
+        -368
+      ],
+      "id": "8832caca-30aa-47df-84ce-2c86c2e1e0e3",
+      "name": "Upload Customer Data",
+      "webhookId": "51bcfa74-9434-4800-8372-09252814f7d4"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "upload__xlsx",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        -192,
+        -384
+      ],
+      "id": "850380e7-9974-49c6-b0ff-c9a08a9299ac",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.orderAmount }}",
+                    "rightValue": 2000,
+                    "operator": {
+                      "type": "number",
+                      "operation": "lte"
+                    },
+                    "id": "3c7a0608-3683-4465-84dc-0fa2953f738d"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Branch A"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "bd5bdfb8-1224-4272-8417-8db8ddcb94f1",
+                    "leftValue": "={{ $json.orderAmount }}",
+                    "rightValue": 3000,
+                    "operator": {
+                      "type": "number",
+                      "operation": "lte"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Branch B"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "6c1e234e-dbe9-4d57-a4b4-0191e3c44bb2",
+                    "leftValue": "={{ $json.orderAmount }}",
+                    "rightValue": 3000,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gt"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Branch C "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        32,
+        -352
+      ],
+      "id": "6150fbfb-0095-46b8-8702-f974ad831c38",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "Branch A",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        288,
+        -432
+      ],
+      "id": "4a5ed2f2-6103-4779-bc0a-0a3ade213596",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "sendTo": "lysterkm@gmail.com",
+        "subject": "Orders upto 2000 - Processed Data",
+        "message": "Attached is the processed Data for orders of Branch A",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "Branch A"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        512,
+        -416
+      ],
+      "id": "03fc9196-4a63-45f7-a13e-204cb12fe3d4",
+      "name": "Send a message",
+      "webhookId": "3cbdd3c7-d2d2-4acd-8c84-a8ee9c6efe1a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MInIoTDpq9UzIhYl",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "Branch B",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        304,
+        -240
+      ],
+      "id": "61ff1542-cad3-4a63-befb-986071d91a62",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "sendTo": "lysterkm@gmail.com",
+        "subject": "Orders between 2001-3000  Processed Data ",
+        "message": "Attached is the processed data for Branch B",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "Branch B"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        528,
+        -224
+      ],
+      "id": "9aaa7889-8e92-4f7d-9438-79abce421975",
+      "name": "Send a message1",
+      "webhookId": "736e5eb5-0a83-499c-8d05-9367ebfd1d4a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MInIoTDpq9UzIhYl",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "Branch C",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        -48
+      ],
+      "id": "da17c3a9-628d-4391-bff0-bad7508eaa2a",
+      "name": "Convert to File2"
+    },
+    {
+      "parameters": {
+        "sendTo": "lysterkm@gmail.com",
+        "subject": "Orders above 3000",
+        "message": "Attached is the processed data for Branch C ",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "Branch C"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        560,
+        -32
+      ],
+      "id": "2e674a8d-5f6f-45c8-9c39-cb0ad4778a1d",
+      "name": "Send a message2",
+      "webhookId": "f7ce4b4d-2d4f-43f4-a34e-7fcb2c322e89",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MInIoTDpq9UzIhYl",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Upload Customer Data": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert to File2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File2": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "ee38d0ff-902c-479e-8d26-eea8a6d9a655",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b19b2666f0186c1b9469a37c465c9758b4118a6b7c948721b8fdb43fce3ad9fd"
+  },
+  "id": "Tg9uifMDzGALkAoV",
+  "tags": []
+}
