@@ -30,3 +30,9 @@ Each branch then passes its filtered dataset into a Convert to File (CSV) node. 
 2. Ensures consistent and error-free segmentation using rule-based logic.
 3. Enables scalable handling of large datasets without additional effort.
 3. Automates reporting and communication, improving operational efficiency.
+
+### Use Cases
+1. Sales Analysis: Segment customers based on purchase value for targeted strategies.
+2. Financial Reporting: Quickly generate categorized revenue reports.
+3. Customer Prioritization: Identify high-value vs low-value orders for business decisions.
+4. Operational Automation: Replace manual Excel processing and email distribution tasks.
