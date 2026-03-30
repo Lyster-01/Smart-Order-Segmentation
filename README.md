@@ -40,4 +40,5 @@ Each branch then passes its filtered dataset into a Convert to File (CSV) node. 
 
 #### Additional Insights
 
-**Modular architecture**: Each node handles a single responsibility (upload → transform → segment → export → send).
+**Modular architecture:** Each node handles a single responsibility (upload → transform → segment → export → send).
+**Scalable logic:** The Switch node can easily be extended with more conditions.
