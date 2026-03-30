@@ -21,8 +21,4 @@ Each branch then passes its filtered dataset into a Convert to File (CSV) node. 
 1. Automate the ingestion and processing of Excel-based order data.
 2. Categorize orders based on predefined financial thresholds.
 3. Generate structured CSV reports for each category.
-
-
-
-
-Distribute segmented insights automatically via email.
+4. Distribute segmented insights automatically via email.
